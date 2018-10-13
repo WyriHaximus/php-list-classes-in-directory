@@ -22,6 +22,10 @@ composer require wyrihaximus/list-classes-in-directory
 $classes = listClassesInDirectory(__DIR__);
 ```
 
+# Acknowledgement
+
+This package is a shorthand function for using [`better reflection`](https://github.com/Roave/BetterReflection/) and is based on one of the [`examples`](https://github.com/Roave/BetterReflection/blob/396a07c9d276cb9ffba581b24b2dadbb542d542e/demo/parsing-whole-directory/example2.php).
+
 # License
 
 The MIT License (MIT)
