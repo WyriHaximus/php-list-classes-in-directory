@@ -15,8 +15,8 @@ final class FunctionalTest extends TestCase
     {
         $classes = iterator_to_array(listClassesInDirectory(dirname(__DIR__) . DIRECTORY_SEPARATOR . 'test-app' . DIRECTORY_SEPARATOR));
         self::assertSame([
-            AwesomesauceHandler::class,
             AwesomesauceCommand::class,
+            AwesomesauceHandler::class,
         ], $classes);
     }
 
