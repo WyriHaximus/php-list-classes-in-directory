@@ -44,5 +44,5 @@ function listClassesInDirecories(string ...$directories): iterable
  */
 function listClassesInDirectory(string $directory): iterable
 {
-    return listClassesInDirecories($directory);
+    yield from listClassesInDirecories($directory);
 }
