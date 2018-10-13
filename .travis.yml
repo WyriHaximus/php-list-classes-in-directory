@@ -1,38 +1,51 @@
 language: php
-sudo: false
 
+## Cache composer bits
 cache:
   directories:
-    - $HOME/.composer/cache ## Cache composer bits
-
-## PHP versions we test against
-php:
-  - 7.2
-  - nightly
+  - $HOME/.composer/cache/files
 
 ## Build matrix for lowest and highest possible targets
 matrix:
   include:
-    - php: 7.2
-      env: dependencies=lowest
-    - php: nightly
-      env: dependencies=lowest
-    - php: 7.2
-      env: dependencies=highest
-    - php: nightly
-      env: dependencies=highest
+  - php: 7.2
+    env:
+    - qaExtended=true
+    - dropPlatform=false
+  - php: nightly
+    env:
+    - dropPlatform=false
+  - php: 7.2
+    env:
+    - dependencies=lowest
+    - dropPlatform=false
+  - php: nightly
+    env:
+    - dependencies=lowest
+    - dropPlatform=false
+  - php: 7.2
+    env:
+    - dependencies=highest
+    - dropPlatform=false
+  - php: nightly
+    env:
+    - dependencies=highest
+    - dropPlatform=false
 
 ## Install or update dependencies
 install:
-  - composer validate
-  - composer config --unset platform.php
-  - if [ -z "$dependencies" ]; then composer install --prefer-dist -n; fi;
-  - if [ "$dependencies" = "lowest" ]; then composer update --prefer-lowest --prefer-dist -n; fi;
-  - if [ "$dependencies" = "highest" ]; then composer update --prefer-dist -n; fi;
-  - composer show
+- composer validate
+- if [ -z "$dropPlatform" ]; then composer config --unset platform.php; fi;
+- if [ -z "$qaExtended" ]; then phpenv config-rm xdebug.ini || :; fi;
+- if [ -z "$dependencies" ]; then composer install --prefer-dist; fi;
+- if [ "$dependencies" = "lowest" ]; then composer update --prefer-lowest --prefer-dist -n; fi;
+- if [ "$dependencies" = "highest" ]; then composer update --prefer-dist -n; fi;
+- composer show
 
-## Run the actual test and benchmark
-script: make travis
+## Run the actual test
+script:
+- if [ -z "$qaExtended" ]; then make ci; fi;
+- if [ "$qaExtended" = "true" ]; then make ci-extended; fi;
 
 ## Gather coverage and set it to coverage servers
-after_script: make travis-coverage
+after_script: if [ "$qaExtended" = "true" ]; then make ci-coverage; fi;
