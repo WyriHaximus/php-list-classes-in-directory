@@ -1,0 +1,38 @@
+language: php
+sudo: false
+
+cache:
+  directories:
+    - $HOME/.composer/cache ## Cache composer bits
+
+## PHP versions we test against
+php:
+  - 7.2
+  - nightly
+
+## Build matrix for lowest and highest possible targets
+matrix:
+  include:
+    - php: 7.2
+      env: dependencies=lowest
+    - php: nightly
+      env: dependencies=lowest
+    - php: 7.2
+      env: dependencies=highest
+    - php: nightly
+      env: dependencies=highest
+
+## Install or update dependencies
+install:
+  - composer validate
+  - composer config --unset platform.php
+  - if [ -z "$dependencies" ]; then composer install --prefer-dist -n; fi;
+  - if [ "$dependencies" = "lowest" ]; then composer update --prefer-lowest --prefer-dist -n; fi;
+  - if [ "$dependencies" = "highest" ]; then composer update --prefer-dist -n; fi;
+  - composer show
+
+## Run the actual test and benchmark
+script: make travis
+
+## Gather coverage and set it to coverage servers
+after_script: make travis-coverage
