@@ -18,8 +18,20 @@ composer require wyrihaximus/list-classes-in-directory
 # Usage
 
 ```php
+
+use function WyriHaximus\listClassesInDirectories;
+use function WyriHaximus\listClassesInDirectory;
+
 // $classes now contains a list of full qualified class names from __DIR__
 $classes = listClassesInDirectory(__DIR__);
+
+// you can also get q list of classes from multiple directories 
+// $classes now contains a list of full qualified class names from 'src/' and 'tests/'
+$classes = listClassesInDirectories(
+    __DIR__ . '/src',
+    __DIR__ . '/tests'
+);
+
 ```
 
 # Acknowledgement
