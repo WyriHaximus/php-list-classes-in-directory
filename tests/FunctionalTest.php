@@ -5,8 +5,8 @@ namespace WyriHaximus\Tests;
 use ApiClients\Tools\TestUtilities\TestCase;
 use Test\App\Commands\AwesomesauceCommand;
 use Test\App\Handlers\AwesomesauceHandler;
-use function WyriHaximus\listClassesInDirectory;
 use function WyriHaximus\listClassesInDirectories;
+use function WyriHaximus\listClassesInDirectory;
 
 final class FunctionalTest extends TestCase
 {
@@ -18,11 +18,11 @@ final class FunctionalTest extends TestCase
             AwesomesauceHandler::class,
         ], $classes);
     }
-    
+
     public function testListClassesInDirectories()
     {
         $app = dirname(__DIR__) . DIRECTORY_SEPARATOR . 'test-app' . DIRECTORY_SEPARATOR;
-        
+
         $classes = iterator_to_array(listClassesInDirectories($app . 'Handlers', $app . 'Commands'));
         self::assertSame([
             AwesomesauceCommand::class,
