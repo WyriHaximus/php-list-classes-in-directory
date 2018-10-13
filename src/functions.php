@@ -36,8 +36,6 @@ function listClassesInDirecories(string ...$directories): iterable
 /**
  * get a list of all classes in the given direcotory.
  *
- * Based on: https://github.com/Roave/BetterReflection/blob/396a07c9d276cb9ffba581b24b2dadbb542d542e/demo/parsing-whole-directory/example2.php.
- * 
  * @param string $directory
  *
  * @return iterable
