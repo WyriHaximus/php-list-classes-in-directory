@@ -13,7 +13,7 @@ use Roave\BetterReflection\SourceLocator\Type\DirectoriesSourceLocator;
  *
  * Based on: https://github.com/Roave/BetterReflection/blob/396a07c9d276cb9ffba581b24b2dadbb542d542e/demo/parsing-whole-directory/example2.php.
  * 
- * @param  array<int, string>  $directories
+ * @param array<int, string> $directories
  *
  * @return iterable
  */
@@ -38,7 +38,7 @@ function listClassesInDirecories(string ...$directories): iterable
  *
  * Based on: https://github.com/Roave/BetterReflection/blob/396a07c9d276cb9ffba581b24b2dadbb542d542e/demo/parsing-whole-directory/example2.php.
  * 
- * @param  string $directory
+ * @param string $directory
  *
  * @return iterable
  */
