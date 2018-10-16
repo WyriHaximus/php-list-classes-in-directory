@@ -1,4 +1,4 @@
-# List all PHP classes in a directories and files
+# List all PHP classes in directories and files
 
 [![Build Status](https://travis-ci.com/wyrihaximus/php-list-classes-in-directory.svg?branch=master)](https://travis-ci.com/wyrihaximus/php-list-classes-in-directory)
 [![Latest Stable Version](https://poser.pugx.org/wyrihaximus/list-classes-in-directory/v/stable.png)](https://packagist.org/packages/wyrihaximus/list-classes-in-directory)
