@@ -80,7 +80,5 @@ function listClassesInFiles(string ...$files): iterable
 {
     foreach ($files as $file) {
         yield from listClassesInFile($file);
-            yield $class;
-        }
     }
 }
