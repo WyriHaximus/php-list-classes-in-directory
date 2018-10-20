@@ -1,6 +1,6 @@
 {
   "name": "wyrihaximus/list-classes-in-directory",
-  "description": "List all classes in the given directory",
+  "description": "Allows you to list full qualified class names in directories and files.",
   "license": "MIT",
   "authors": [
     {
