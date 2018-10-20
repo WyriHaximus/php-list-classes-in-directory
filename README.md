@@ -1,11 +1,11 @@
 # List all PHP classes in directories and files
 
-[![Build Status](https://travis-ci.com/wyrihaximus/php-list-classes-in-directory.svg?branch=master)](https://travis-ci.com/wyrihaximus/php-list-classes-in-directory)
+[![Build Status](https://travis-ci.com/WyriHaximus/php-list-classes-in-directory.svg?branch=master)](https://travis-ci.com/WyriHaximus/php-list-classes-in-directory)
 [![Latest Stable Version](https://poser.pugx.org/wyrihaximus/list-classes-in-directory/v/stable.png)](https://packagist.org/packages/wyrihaximus/list-classes-in-directory)
 [![Total Downloads](https://poser.pugx.org/wyrihaximus/list-classes-in-directory/downloads.png)](https://packagist.org/packages/wyrihaximus/list-classes-in-directory/stats)
 [![Code Coverage](https://scrutinizer-ci.com/g/wyrihaximus/php-list-classes-in-directory/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/wyrihaximus/php-list-classes-in-directory/?branch=master)
 [![License](https://poser.pugx.org/wyrihaximus/list-classes-in-directory/license.png)](https://packagist.org/packages/wyrihaximus/list-classes-in-directory)
-[![PHP 7 ready](http://php7ready.timesplinter.ch/wyrihaximus/php-list-classes-in-directory/badge.svg)](https://travis-ci.org/wyrihaximus/php-list-classes-in-directory)
+[![PHP 7 ready](http://php7ready.timesplinter.ch/wyrihaximus/php-list-classes-in-directory/badge.svg)](https://travis-ci.org/WyriHaximus/php-list-classes-in-directory)
 
 # Install
 
