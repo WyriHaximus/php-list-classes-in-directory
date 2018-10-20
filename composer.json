@@ -10,7 +10,7 @@
   ],
   "require": {
     "php": "^7.2",
-    "roave/better-reflection": "^3.1"
+    "roave/better-reflection": "^3.1 || ^2.0"
   },
   "require-dev": {
     "api-clients/test-utilities": "^5.1"
