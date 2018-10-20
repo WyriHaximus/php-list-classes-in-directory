@@ -27,6 +27,7 @@ $classes = listClassesInDirectories(
     __DIR__ . '/tests'
 );
 ```
+
 #### get a list of classes from one directory.
 ```php
 use function WyriHaximus\listClassesInDirectory;
