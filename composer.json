@@ -13,7 +13,7 @@
     "roave/better-reflection": "^3.1 || ^2.0"
   },
   "require-dev": {
-    "api-clients/test-utilities": "^5.1"
+    "api-clients/test-utilities": "^5.0"
   },
   "autoload": {
     "files": [
