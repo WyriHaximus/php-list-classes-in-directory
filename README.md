@@ -49,7 +49,7 @@ $classes = listClassesInFiles(
 use function WyriHaximus\listClassesInFile;
 
 // $classes now contains a list of full qualified class names from 'Foo.php'
-$classes = listClassesInDirectory(__DIR__.'/Foo.php');
+$classes = listClassesInFile(__DIR__.'/Foo.php');
 ```
 
 
