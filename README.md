@@ -1,4 +1,4 @@
-# List all PHP classes in a given directory
+# List all PHP classes in directories and files
 
 [![Build Status](https://travis-ci.com/wyrihaximus/php-list-classes-in-directory.svg?branch=master)](https://travis-ci.com/wyrihaximus/php-list-classes-in-directory)
 [![Latest Stable Version](https://poser.pugx.org/wyrihaximus/list-classes-in-directory/v/stable.png)](https://packagist.org/packages/wyrihaximus/list-classes-in-directory)
@@ -17,22 +17,41 @@ composer require wyrihaximus/list-classes-in-directory
 
 # Usage
 
+#### get a list of classes from multiple directories.
 ```php
-
 use function WyriHaximus\listClassesInDirectories;
-use function WyriHaximus\listClassesInDirectory;
 
-// $classes now contains a list of full qualified class names from __DIR__
-$classes = listClassesInDirectory(__DIR__);
-
-// you can also get a list of classes from multiple directories 
 // $classes now contains a list of full qualified class names from 'src/' and 'tests/'
 $classes = listClassesInDirectories(
     __DIR__ . '/src',
     __DIR__ . '/tests'
 );
-
 ```
+#### get a list of classes from one directory.
+```php
+use function WyriHaximus\listClassesInDirectory;
+
+// $classes now contains a list of full qualified class names from __DIR__
+$classes = listClassesInDirectory(__DIR__);
+```
+#### get a list of classes from multiple files.
+```php
+use function WyriHaximus\listClassesInFiles;
+
+// $classes now contains a list of full qualified class names from 'Bar.php' and 'Foo.php'
+$classes = listClassesInFiles(
+    __DIR__ . '/Bar.php',
+    __DIR__ . '/Foo.php'
+);
+```
+#### get a list of classes from one file.
+```php
+use function WyriHaximus\listClassesInFile;
+
+// $classes now contains a list of full qualified class names from 'Foo.php'
+$classes = listClassesInDirectory(__DIR__.'/Foo.php');
+```
+
 
 # Acknowledgement
 
