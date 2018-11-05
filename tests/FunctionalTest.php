@@ -7,6 +7,8 @@ use Test\App\Commands\AwesomesauceCommand;
 use Test\App\Foo\Bar\Bar;
 use Test\App\Foo\Bar\Foo;
 use Test\App\Handlers\AwesomesauceHandler;
+use Test\Classes\InstantiatableClass;
+use Test\Classes\NonInstantiatableClass;
 use const DIRECTORY_SEPARATOR;
 use const SORT_NATURAL;
 use function dirname;
@@ -15,6 +17,8 @@ use function WyriHaximus\listClassesInDirectories;
 use function WyriHaximus\listClassesInDirectory;
 use function WyriHaximus\listClassesInFile;
 use function WyriHaximus\listClassesInFiles;
+use function WyriHaximus\listInstantiatableClassesInDirectory;
+use function WyriHaximus\listNonInstantiatableClassesInDirectory;
 
 final class FunctionalTest extends TestCase
 {
@@ -70,6 +74,28 @@ final class FunctionalTest extends TestCase
             Bar::class,
             Foo::class,
             AwesomesauceHandler::class,
+        ], $classes);
+    }
+
+    public function testListInstantiatableClassesInDirectory(): void
+    {
+        $directory = dirname(__DIR__) . DIRECTORY_SEPARATOR . 'test-classes' . DIRECTORY_SEPARATOR ;
+        $classes = iterator_to_array(listInstantiatableClassesInDirectory($directory));
+        sort($classes, SORT_NATURAL);
+
+        self::assertSame([
+            InstantiatableClass::class,
+        ], $classes);
+    }
+
+    public function testListNonInstantiatableClassesInDirectory(): void
+    {
+        $directory = dirname(__DIR__) . DIRECTORY_SEPARATOR . 'test-classes' . DIRECTORY_SEPARATOR ;
+        $classes = iterator_to_array(listNonInstantiatableClassesInDirectory($directory));
+        sort($classes, SORT_NATURAL);
+
+        self::assertSame([
+            NonInstantiatableClass::class,
         ], $classes);
     }
 }

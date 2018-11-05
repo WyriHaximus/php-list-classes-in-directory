@@ -23,7 +23,8 @@
   "autoload-dev": {
     "psr-4": {
       "WyriHaximus\\Tests\\": "tests/",
-      "Test\\App\\": "test-app/"
+      "Test\\App\\": "test-app/",
+      "Test\\Classes\\": "test-classes/"
     }
   },
   "config": {

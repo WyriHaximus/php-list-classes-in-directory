@@ -3,7 +3,9 @@
 namespace WyriHaximus;
 
 use Roave\BetterReflection\BetterReflection;
+use Roave\BetterReflection\Reflection\ReflectionClass;
 use Roave\BetterReflection\Reflector\ClassReflector;
+use Roave\BetterReflection\Reflector\Exception\IdentifierNotFound;
 use Roave\BetterReflection\SourceLocator\Type\AggregateSourceLocator;
 use Roave\BetterReflection\SourceLocator\Type\AutoloadSourceLocator;
 use Roave\BetterReflection\SourceLocator\Type\DirectoriesSourceLocator;
@@ -83,4 +85,52 @@ function listClassesInFiles(string ...$files): iterable
             yield $class;
         }
     }
+}
+
+function listInstantiatableClassesInDirectories(string ...$directories): iterable
+{
+    $iterator = listClassesInDirectories(...$directories);
+
+    return new class($iterator) extends \FilterIterator {
+        public function accept(): bool
+        {
+            $className = $this->getInnerIterator()->current();
+            try {
+                $reflectionClass = ReflectionClass::createFromName($className);
+
+                return $reflectionClass->isInstantiable();
+            } catch (IdentifierNotFound $exception) {
+                return false;
+            }
+        }
+    };
+}
+
+function listInstantiatableClassesInDirectory(string $directory): iterable
+{
+    yield from listInstantiatableClassesInDirectories($directory);
+}
+
+function listNonInstantiatableClassesInDirectories(string ...$directories): iterable
+{
+    $iterator = listClassesInDirectories(...$directories);
+
+    return new class($iterator) extends \FilterIterator {
+        public function accept(): bool
+        {
+            $className = $this->getInnerIterator()->current();
+            try {
+                $reflectionClass = ReflectionClass::createFromName($className);
+
+                return $reflectionClass->isInstantiable() === false;
+            } catch (IdentifierNotFound $exception) {
+                return true;
+            }
+        }
+    };
+}
+
+function listNonInstantiatableClassesInDirectory(string $directory): iterable
+{
+    yield from listNonInstantiatableClassesInDirectories($directory);
 }
