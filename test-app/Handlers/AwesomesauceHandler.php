@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Test\App\Handlers;
 
@@ -7,7 +7,7 @@ use Test\App\Commands\AwesomesauceCommand;
 class AwesomesauceHandler
 {
     /**
-     * @param AwesomesauceCommand $command
+     * @param  AwesomesauceCommand $command
      * @return string
      */
     public function handler(AwesomesauceCommand $command)
