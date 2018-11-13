@@ -20,6 +20,8 @@ composer require wyrihaximus/list-classes-in-directory
 #### get a list of classes from multiple directories.
 ```php
 use function WyriHaximus\listClassesInDirectories;
+use function WyriHaximus\listInstantiatableClassesInDirectories;
+use function WyriHaximus\listNonInstantiatableClassesInDirectories;
 
 // $classes now contains a list of full qualified class names from 'src/' and 'tests/'
 $classes = listClassesInDirectories(
@@ -28,12 +30,23 @@ $classes = listClassesInDirectories(
 );
 ```
 
+// use listInstantiatableClassesInDirectories() or listNonInstantiatableClassesInDirectories() to only consider classes that can actually be instantiated, or not.
+$instantiatableClasses = listInstantiatableClassesInDirectory(__DIR__ . '/src', __DIR__ . '/tests');
+$nonInstantiatableClasses = listNonInstantiatableClassesInDirectory(____DIR__ . '/src', __DIR__ . '/tests'__);
+
 #### get a list of classes from one directory.
 ```php
 use function WyriHaximus\listClassesInDirectory;
+use function WyriHaximus\listInstantiatableClassesInDirectory;
+use function WyriHaximus\listNonInstantiatableClassesInDirectory;
 
 // $classes now contains a list of full qualified class names from __DIR__
 $classes = listClassesInDirectory(__DIR__);
+
+// use listInstantiatableClassesInDirectory() or listNonInstantiatableClassesInDirectory() to only consider classes that can actually be instantiated, or not.
+$instantiatableClasses = listInstantiatableClassesInDirectory(__DIR__);
+$nonInstantiatableClasses = listNonInstantiatableClassesInDirectory(__DIR__);
+
 ```
 #### get a list of classes from multiple files.
 ```php
