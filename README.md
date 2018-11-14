@@ -28,11 +28,18 @@ $classes = listClassesInDirectories(
     __DIR__ . '/src',
     __DIR__ . '/tests'
 );
-```
+
 
 // use listInstantiatableClassesInDirectories() or listNonInstantiatableClassesInDirectories() to only consider classes that can actually be instantiated, or not.
-$instantiatableClasses = listInstantiatableClassesInDirectory(__DIR__ . '/src', __DIR__ . '/tests');
-$nonInstantiatableClasses = listNonInstantiatableClassesInDirectory(____DIR__ . '/src', __DIR__ . '/tests'__);
+$instantiatableClasses = listInstantiatableClassesInDirectory(
+    __DIR__ . '/src', 
+    __DIR__ . '/tests'
+);
+$nonInstantiatableClasses = listNonInstantiatableClassesInDirectory(
+    __DIR__ . '/src', 
+    __DIR__ . '/tests'
+);
+```
 
 #### get a list of classes from one directory.
 ```php
