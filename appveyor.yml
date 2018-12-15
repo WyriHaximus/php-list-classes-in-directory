@@ -50,7 +50,7 @@ install:
 - composer config --unset platform.php
 - IF %dependencies%==lowest appveyor-retry composer update --prefer-lowest --no-progress -n %COMPOSER_EXTRA_FLAGS%
 - IF %dependencies%==current appveyor-retry composer install --no-progress %COMPOSER_EXTRA_FLAGS%
-- IF %dependencies%==highest appveyor-retry composer update --no-progress --n  %COMPOSER_EXTRA_FLAGS%
+- IF %dependencies%==highest appveyor-retry composer update --no-progress -n  %COMPOSER_EXTRA_FLAGS%
 #- composer show
 
 ## Run the actual test
