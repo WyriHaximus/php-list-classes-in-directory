@@ -30,14 +30,14 @@ init:
 - SET PHP=1
 - SET ANSICON=121x90 (121x90)
 - SET PHP_CS_FIXER_IGNORE_ENV=1
-- SET COMPOSER_EXTRA_FLAGS=""
+- SET COMPOSER_EXTRA_FLAGS="--profile "
 
 ## Install PHP and composer, and run the appropriate composer command
 install:
 - IF EXIST c:\tools\php (SET PHP=0)
 - ps: appveyor-retry cinst --params '""/InstallDir:C:\tools\php""' --ignore-checksums -y php --version ((choco search php --exact --all-versions -r | select-string -pattern $env:php_ver_target | sort { [version]($_ -split '\|' | select -last 1) } -Descending | Select-Object -first 1) -replace '[php|]','')
 - cd c:\tools\php
-- IF %php_ver_target%==7.3 SET COMPOSER_EXTRA_FLAGS="--ignore-platform-reqs"
+- IF %php_ver_target%==7.3 SET COMPOSER_EXTRA_FLAGS="--profile --ignore-platform-reqs"
 - IF %PHP%==1 copy php.ini-production php.ini /Y
 - IF %PHP%==1 echo date.timezone="UTC" >> php.ini
 - IF %PHP%==1 echo extension_dir=ext >> php.ini
@@ -48,9 +48,9 @@ install:
 - appveyor-retry appveyor DownloadFile https://getcomposer.org/composer.phar
 - cd c:\projects\php-project-workspace
 - composer config --unset platform.php
-- IF %dependencies%==lowest appveyor-retry composer update --prefer-lowest --no-progress --profile -n %COMPOSER_EXTRA_FLAGS%
-- IF %dependencies%==current appveyor-retry composer install --no-progress --profile  %COMPOSER_EXTRA_FLAGS%
-- IF %dependencies%==highest appveyor-retry composer update --no-progress --profile -n  %COMPOSER_EXTRA_FLAGS%
+- IF %dependencies%==lowest appveyor-retry composer update --prefer-lowest --no-progress -n %COMPOSER_EXTRA_FLAGS%
+- IF %dependencies%==current appveyor-retry composer install --no-progress %COMPOSER_EXTRA_FLAGS%
+- IF %dependencies%==highest appveyor-retry composer update --no-progress --n  %COMPOSER_EXTRA_FLAGS%
 #- composer show
 
 ## Run the actual test
