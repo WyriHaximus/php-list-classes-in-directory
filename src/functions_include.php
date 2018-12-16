@@ -2,10 +2,8 @@
 
 namespace WyriHaximus;
 
-use function function_exists;
-
 // @codeCoverageIgnoreStart
-if (!function_exists('WyriHaximus\listClassesInDirectory')) {
+if (!\function_exists('WyriHaximus\listClassesInDirectory')) {
     require __DIR__ . '/functions.php';
 }
 // @codeCoverageIgnoreEnd
