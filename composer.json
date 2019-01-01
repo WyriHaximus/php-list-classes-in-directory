@@ -14,7 +14,7 @@
   },
   "require-dev": {
     "api-clients/cs-fixer-config": "^1.1",
-    "api-clients/test-utilities": "^5.2"
+    "api-clients/test-utilities": "^5.4"
   },
   "autoload": {
     "files": [
