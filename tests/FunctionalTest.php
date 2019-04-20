@@ -3,14 +3,14 @@
 namespace WyriHaximus\Tests;
 
 use ApiClients\Tools\TestUtilities\TestCase;
+use const DIRECTORY_SEPARATOR;
+use const SORT_NATURAL;
 use Test\App\Commands\AwesomesauceCommand;
 use Test\App\Foo\Bar\Bar;
 use Test\App\Foo\Bar\Foo;
 use Test\App\Handlers\AwesomesauceHandler;
 use Test\Classes\InstantiatableClass;
 use Test\Classes\NonInstantiatableClass;
-use const DIRECTORY_SEPARATOR;
-use const SORT_NATURAL;
 use function WyriHaximus\listClassesInDirectories;
 use function WyriHaximus\listClassesInDirectory;
 use function WyriHaximus\listClassesInFile;
