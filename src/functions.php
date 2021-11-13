@@ -1,7 +1,11 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace WyriHaximus;
 
+use ArrayIterator;
+use FilterIterator;
 use Roave\BetterReflection\BetterReflection;
 use Roave\BetterReflection\Reflection\ReflectionClass;
 use Roave\BetterReflection\Reflector\ClassReflector;
@@ -11,14 +15,15 @@ use Roave\BetterReflection\SourceLocator\Type\AutoloadSourceLocator;
 use Roave\BetterReflection\SourceLocator\Type\DirectoriesSourceLocator;
 use Roave\BetterReflection\SourceLocator\Type\SingleFileSourceLocator;
 
+use const WyriHaximus\Constants\Boolean\FALSE_;
+use const WyriHaximus\Constants\Boolean\TRUE_;
+
 /**
  * get a list of all classes in the given directories.
  *
  * Based on: https://github.com/Roave/BetterReflection/blob/396a07c9d276cb9ffba581b24b2dadbb542d542e/demo/parsing-whole-directory/example2.php.
  *
- * @param string[] $directories
- *
- * @return iterable
+ * @return iterable<string>
  */
 function listClassesInDirectories(string ...$directories): iterable
 {
@@ -39,9 +44,7 @@ function listClassesInDirectories(string ...$directories): iterable
 /**
  * get a list of all classes in the given directory.
  *
- * @param string $directory
- *
- * @return iterable
+ * @return iterable<string>
  */
 function listClassesInDirectory(string $directory): iterable
 {
@@ -51,9 +54,7 @@ function listClassesInDirectory(string $directory): iterable
 /**
  * get a list of all classes in the given file.
  *
- * @param string $file
- *
- * @return iterable
+ * @return iterable<string>
  */
 function listClassesInFile(string $file): iterable
 {
@@ -74,9 +75,7 @@ function listClassesInFile(string $file): iterable
 /**
  * get a list of all classes in the given files.
  *
- * @param string[] $files
- *
- * @return iterable
+ * @return iterable<string>
  */
 function listClassesInFiles(string ...$files): iterable
 {
@@ -87,11 +86,14 @@ function listClassesInFiles(string ...$files): iterable
     }
 }
 
+/**
+ * @return iterable<string>
+ */
 function listInstantiatableClassesInDirectories(string ...$directories): iterable
 {
     $iterator = listClassesInDirectories(...$directories);
 
-    return new class($iterator) extends \FilterIterator {
+    return new class (new ArrayIterator([...$iterator])) extends FilterIterator {
         public function accept(): bool
         {
             $className = $this->getInnerIterator()->current();
@@ -100,36 +102,45 @@ function listInstantiatableClassesInDirectories(string ...$directories): iterabl
 
                 return $reflectionClass->isInstantiable();
             } catch (IdentifierNotFound $exception) {
-                return false;
+                return FALSE_;
             }
         }
     };
 }
 
+/**
+ * @return iterable<string>
+ */
 function listInstantiatableClassesInDirectory(string $directory): iterable
 {
     yield from listInstantiatableClassesInDirectories($directory);
 }
 
+/**
+ * @return iterable<string>
+ */
 function listNonInstantiatableClassesInDirectories(string ...$directories): iterable
 {
     $iterator = listClassesInDirectories(...$directories);
 
-    return new class($iterator) extends \FilterIterator {
+    return new class (new ArrayIterator([...$iterator])) extends FilterIterator {
         public function accept(): bool
         {
             $className = $this->getInnerIterator()->current();
             try {
                 $reflectionClass = ReflectionClass::createFromName($className);
 
-                return $reflectionClass->isInstantiable() === false;
+                return $reflectionClass->isInstantiable() === FALSE_;
             } catch (IdentifierNotFound $exception) {
-                return true;
+                return TRUE_;
             }
         }
     };
 }
 
+/**
+ * @return iterable<string>
+ */
 function listNonInstantiatableClassesInDirectory(string $directory): iterable
 {
     yield from listNonInstantiatableClassesInDirectories($directory);
