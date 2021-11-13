@@ -9,12 +9,18 @@
     }
   ],
   "require": {
-    "php": "^7.2",
-    "roave/better-reflection": "^4.0 || ^3.1 || ^2.0"
+    "php": "^8 || ^7.4",
+    "roave/better-reflection": "^4 || ^3.1 || ^2",
+    "wyrihaximus/constants": "^1.6"
   },
   "require-dev": {
-    "api-clients/cs-fixer-config": "^1.1",
-    "api-clients/test-utilities": "^5.4"
+    "wyrihaximus/async-test-utilities": "^4.0.7"
+  },
+  "config": {
+    "platform": {
+      "php": "7.4.7"
+    },
+    "sort-packages": true
   },
   "autoload": {
     "files": [
@@ -26,65 +32,17 @@
       "WyriHaximus\\Tests\\": "tests/",
       "Test\\App\\": "test-app/",
       "Test\\Classes\\": "test-classes/"
-    }
-  },
-  "config": {
-    "sort-packages": true,
-    "platform": {
-      "php": "7.2"
-    }
+    },
+    "files": [
+      "test-app/Foo/Bar/BarAndFoo.php"
+    ]
   },
   "scripts": {
-    "ensure-installed": "composer install --ansi -n -q",
-    "cs": [
-      "@ensure-installed",
-      "php-cs-fixer fix --config=.php_cs --ansi --dry-run --diff --verbose --allow-risky=yes --show-progress=estimating"
+    "post-install-cmd": [
+      "composer normalize"
     ],
-    "cs-fix": [
-      "@ensure-installed",
-      "php-cs-fixer fix --config=.php_cs --ansi --verbose --allow-risky=yes --show-progress=estimating"
-    ],
-    "unit": [
-      "@ensure-installed",
-      "phpunit --colors=always -c phpunit.xml.dist"
-    ],
-    "unit-coverage": [
-      "@ensure-installed",
-      "phpunit --colors=always -c phpunit.xml.dist --coverage-text --coverage-html covHtml --coverage-clover ./build/logs/clover.xml"
-    ],
-    "lint-php": [
-      "@ensure-installed",
-      "parallel-lint --exclude vendor ."
-    ],
-    "qa-all": [
-      "@lint-php",
-      "@cs",
-      "@unit"
-    ],
-    "qa-all-coverage": [
-      "@lint-php",
-      "@cs",
-      "@unit-coverage"
-    ],
-    "qa-windows": [
-      "@lint-php",
-      "@cs",
-      "@unit"
-    ],
-    "qa-ci": [
-      "@unit"
-    ],
-    "qa-ci-extended": [
-      "@qa-all-coverage"
-    ],
-    "qa-ci-windows": [
-      "@qa-windows"
-    ],
-    "qa-contrib": [
-      "@qa-all"
-    ],
-    "ci-coverage": [
-      "if [ -f ./build/logs/clover.xml ]; then wget https://scrutinizer-ci.com/ocular.phar && php ocular.phar code-coverage:upload --format=php-clover ./build/logs/clover.xml; fi"
+    "post-update-cmd": [
+      "composer normalize"
     ]
   }
 }

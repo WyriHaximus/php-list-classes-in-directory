@@ -1,0 +1,21 @@
+{
+    "timeout": 120,
+    "source": {
+        "directories": [
+            "src"
+        ]
+    },
+    "logs": {
+        "text": "./var/infection.log",
+        "summary": "./var/infection-summary.log",
+        "json": "./var/infection.json",
+        "perMutator": "./var/infection-per-mutator.md"
+    },
+    "mutators": {
+        "@default": true,
+        "Identical": false
+    },
+    "phpUnit": {
+        "configDir": "./etc/qa/"
+    }
+}
