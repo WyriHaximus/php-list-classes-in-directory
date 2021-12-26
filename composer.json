@@ -10,13 +10,20 @@
   ],
   "require": {
     "php": "^8 || ^7.4",
-    "roave/better-reflection": "^4 || ^3.1 || ^2",
+    "roave/better-reflection": "^5 || ^4 || ^3.1 || ^2",
     "wyrihaximus/constants": "^1.6"
   },
   "require-dev": {
     "wyrihaximus/async-test-utilities": "^4.0.7"
   },
   "config": {
+    "allow-plugins": {
+      "composer/package-versions-deprecated": true,
+      "dealerdirect/phpcodesniffer-composer-installer": true,
+      "ergebnis/composer-normalize": true,
+      "icanhazstring/composer-unused": true,
+      "infection/extension-installer": true
+    },
     "platform": {
       "php": "7.4.7"
     },
