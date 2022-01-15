@@ -9,11 +9,14 @@ use FilterIterator;
 use Roave\BetterReflection\BetterReflection;
 use Roave\BetterReflection\Reflection\ReflectionClass;
 use Roave\BetterReflection\Reflector\ClassReflector;
+use Roave\BetterReflection\Reflector\DefaultReflector;
 use Roave\BetterReflection\Reflector\Exception\IdentifierNotFound;
 use Roave\BetterReflection\SourceLocator\Type\AggregateSourceLocator;
 use Roave\BetterReflection\SourceLocator\Type\AutoloadSourceLocator;
 use Roave\BetterReflection\SourceLocator\Type\DirectoriesSourceLocator;
 use Roave\BetterReflection\SourceLocator\Type\SingleFileSourceLocator;
+
+use function class_exists;
 
 use const WyriHaximus\Constants\Boolean\FALSE_;
 use const WyriHaximus\Constants\Boolean\TRUE_;
@@ -36,7 +39,7 @@ function listClassesInDirectories(string ...$directories): iterable
         new AutoloadSourceLocator((new BetterReflection())->astLocator()),
     ]);
 
-    foreach ((new ClassReflector($sourceLocator))->getAllClasses() as $class) {
+    foreach (listClassesInSourceLocator($sourceLocator) as $class) {
         yield $class->getName();
     }
 }
@@ -67,7 +70,7 @@ function listClassesInFile(string $file): iterable
         new AutoloadSourceLocator((new BetterReflection())->astLocator()),
     ]);
 
-    foreach ((new ClassReflector($sourceLocator))->getAllClasses() as $class) {
+    foreach (listClassesInSourceLocator($sourceLocator) as $class) {
         yield $class->getName();
     }
 }
@@ -144,4 +147,18 @@ function listNonInstantiatableClassesInDirectories(string ...$directories): iter
 function listNonInstantiatableClassesInDirectory(string $directory): iterable
 {
     yield from listNonInstantiatableClassesInDirectories($directory);
+}
+
+/**
+ * @internal
+ *
+ * @return iterable<ReflectionClass>
+ */
+function listClassesInSourceLocator(AggregateSourceLocator $sourceLocator): iterable
+{
+    /**
+     * @phpstan-ignore-next-line
+     * @psalm-suppress UndefinedClass
+     */
+    yield from class_exists(ClassReflector::class) ? (new ClassReflector($sourceLocator))->getAllClasses() : (new DefaultReflector($sourceLocator))->reflectAllClasses();
 }
