@@ -13,7 +13,7 @@ use Test\Classes\NonInstantiatableClass;
 use WyriHaximus\TestUtilities\TestCase;
 
 use function dirname;
-use function Safe\sort;
+use function sort;
 use function WyriHaximus\listClassesInDirectories;
 use function WyriHaximus\listClassesInDirectory;
 use function WyriHaximus\listClassesInFile;
