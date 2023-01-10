@@ -16,7 +16,9 @@ use Roave\BetterReflection\SourceLocator\Type\AutoloadSourceLocator;
 use Roave\BetterReflection\SourceLocator\Type\DirectoriesSourceLocator;
 use Roave\BetterReflection\SourceLocator\Type\SingleFileSourceLocator;
 
+use function array_values;
 use function class_exists;
+use function is_string;
 
 use const WyriHaximus\Constants\Boolean\FALSE_;
 use const WyriHaximus\Constants\Boolean\TRUE_;
@@ -32,7 +34,7 @@ function listClassesInDirectories(string ...$directories): iterable
 {
     $sourceLocator = new AggregateSourceLocator([
         new DirectoriesSourceLocator(
-            $directories,
+            array_values($directories),
             (new BetterReflection())->astLocator()
         ),
         // ↓ required to autoload parent classes/interface from another directory than /src (e.g. /vendor)
@@ -96,10 +98,18 @@ function listInstantiatableClassesInDirectories(string ...$directories): iterabl
 {
     $iterator = listClassesInDirectories(...$directories);
 
+    /**
+     * @psalm-suppress MissingTemplateParam
+     * @psalm-suppress InvalidOperand
+     */
     return new class (new ArrayIterator([...$iterator])) extends FilterIterator {
         public function accept(): bool
         {
             $className = $this->getInnerIterator()->current();
+            if (! is_string($className)) {
+                return FALSE_;
+            }
+
             try {
                 $reflectionClass = ReflectionClass::createFromName($className);
 
@@ -126,10 +136,18 @@ function listNonInstantiatableClassesInDirectories(string ...$directories): iter
 {
     $iterator = listClassesInDirectories(...$directories);
 
+    /**
+     * @psalm-suppress MissingTemplateParam
+     * @psalm-suppress InvalidOperand
+     */
     return new class (new ArrayIterator([...$iterator])) extends FilterIterator {
         public function accept(): bool
         {
             $className = $this->getInnerIterator()->current();
+            if (! is_string($className)) {
+                return FALSE_;
+            }
+
             try {
                 $reflectionClass = ReflectionClass::createFromName($className);
 
@@ -157,7 +175,6 @@ function listNonInstantiatableClassesInDirectory(string $directory): iterable
 function listClassesInSourceLocator(AggregateSourceLocator $sourceLocator): iterable
 {
     /**
-     * @phpstan-ignore-next-line
      * @psalm-suppress UndefinedClass
      */
     yield from class_exists(ClassReflector::class) ? (new ClassReflector($sourceLocator))->getAllClasses() : (new DefaultReflector($sourceLocator))->reflectAllClasses();

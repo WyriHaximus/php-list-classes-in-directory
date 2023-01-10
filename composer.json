@@ -9,12 +9,12 @@
     }
   ],
   "require": {
-    "php": "^8 || ^7.4",
-    "roave/better-reflection": "^6 || ^5 || ^4 || ^3.1 || ^2",
+    "php": "^8.2",
+    "roave/better-reflection": "^6",
     "wyrihaximus/constants": "^1.6"
   },
   "require-dev": {
-    "wyrihaximus/async-test-utilities": "^4.0.7"
+    "wyrihaximus/async-test-utilities": "^6.0.0"
   },
   "autoload": {
     "files": [
@@ -40,7 +40,7 @@
       "infection/extension-installer": true
     },
     "platform": {
-      "php": "7.4.7"
+      "php": "8.2.13"
     },
     "sort-packages": true
   },

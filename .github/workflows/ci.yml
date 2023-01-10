@@ -90,7 +90,8 @@ jobs:
     container:
       image: ghcr.io/wyrihaximusnet/php:${{ matrix.php }}-nts-buster-dev-root
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v3
+      - run: git config --global --add safe.directory $GITHUB_WORKSPACE # Do this ourself because `actions/checkout@v3 doesn't succeed in doing this
       - name: Cache composer packages
         uses: actions/cache@v1
         with:
