@@ -24,9 +24,7 @@ use function WyriHaximus\listNonInstantiatableClassesInDirectory;
 use const DIRECTORY_SEPARATOR;
 use const SORT_NATURAL;
 
-/**
- * @internal
- */
+/** @internal */
 final class FunctionalTest extends TestCase
 {
     public function testListClassesInDirectory(): void

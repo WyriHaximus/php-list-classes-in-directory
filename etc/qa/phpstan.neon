@@ -1,7 +1,8 @@
 parameters:
 	ergebnis:
-		classesAllowedToBeExtended:
-			- FilterIterator
+		noExtends:
+			classesAllowedToBeExtended:
+			    - FilterIterator
 
 includes:
-	- ../../vendor/wyrihaximus/async-test-utilities/rules.neon
+	- ../../vendor/wyrihaximus/test-utilities/rules.neon

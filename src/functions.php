@@ -35,7 +35,7 @@ function listClassesInDirectories(string ...$directories): iterable
     $sourceLocator = new AggregateSourceLocator([
         new DirectoriesSourceLocator(
             array_values($directories),
-            (new BetterReflection())->astLocator()
+            (new BetterReflection())->astLocator(),
         ),
         // ↓ required to autoload parent classes/interface from another directory than /src (e.g. /vendor)
         new AutoloadSourceLocator((new BetterReflection())->astLocator()),
@@ -59,6 +59,8 @@ function listClassesInDirectory(string $directory): iterable
 /**
  * get a list of all classes in the given file.
  *
+ * @param non-empty-string $file
+ *
  * @return iterable<string>
  */
 function listClassesInFile(string $file): iterable
@@ -66,7 +68,7 @@ function listClassesInFile(string $file): iterable
     $sourceLocator = new AggregateSourceLocator([
         new SingleFileSourceLocator(
             $file,
-            (new BetterReflection())->astLocator()
+            (new BetterReflection())->astLocator(),
         ),
         // ↓ required to autoload parent classes/interface from another directory (e.g. /vendor)
         new AutoloadSourceLocator((new BetterReflection())->astLocator()),
@@ -80,6 +82,8 @@ function listClassesInFile(string $file): iterable
 /**
  * get a list of all classes in the given files.
  *
+ * @param non-empty-string ...$files
+ *
  * @return iterable<string>
  */
 function listClassesInFiles(string ...$files): iterable
@@ -91,9 +95,7 @@ function listClassesInFiles(string ...$files): iterable
     }
 }
 
-/**
- * @return iterable<string>
- */
+/** @return iterable<string> */
 function listInstantiatableClassesInDirectories(string ...$directories): iterable
 {
     $iterator = listClassesInDirectories(...$directories);
@@ -106,7 +108,7 @@ function listInstantiatableClassesInDirectories(string ...$directories): iterabl
         public function accept(): bool
         {
             $className = $this->getInnerIterator()->current();
-            if (! is_string($className)) {
+            if (is_string($className) === FALSE_) {
                 return FALSE_;
             }
 
@@ -114,24 +116,20 @@ function listInstantiatableClassesInDirectories(string ...$directories): iterabl
                 $reflectionClass = ReflectionClass::createFromName($className);
 
                 return $reflectionClass->isInstantiable();
-            } catch (IdentifierNotFound $exception) {
+            } catch (IdentifierNotFound) {
                 return FALSE_;
             }
         }
     };
 }
 
-/**
- * @return iterable<string>
- */
+/** @return iterable<string> */
 function listInstantiatableClassesInDirectory(string $directory): iterable
 {
     yield from listInstantiatableClassesInDirectories($directory);
 }
 
-/**
- * @return iterable<string>
- */
+/** @return iterable<string> */
 function listNonInstantiatableClassesInDirectories(string ...$directories): iterable
 {
     $iterator = listClassesInDirectories(...$directories);
@@ -144,7 +142,7 @@ function listNonInstantiatableClassesInDirectories(string ...$directories): iter
         public function accept(): bool
         {
             $className = $this->getInnerIterator()->current();
-            if (! is_string($className)) {
+            if (is_string($className) === FALSE_) {
                 return FALSE_;
             }
 
@@ -152,16 +150,14 @@ function listNonInstantiatableClassesInDirectories(string ...$directories): iter
                 $reflectionClass = ReflectionClass::createFromName($className);
 
                 return $reflectionClass->isInstantiable() === FALSE_;
-            } catch (IdentifierNotFound $exception) {
+            } catch (IdentifierNotFound) {
                 return TRUE_;
             }
         }
     };
 }
 
-/**
- * @return iterable<string>
- */
+/** @return iterable<string> */
 function listNonInstantiatableClassesInDirectory(string $directory): iterable
 {
     yield from listNonInstantiatableClassesInDirectories($directory);
@@ -174,8 +170,6 @@ function listNonInstantiatableClassesInDirectory(string $directory): iterable
  */
 function listClassesInSourceLocator(AggregateSourceLocator $sourceLocator): iterable
 {
-    /**
-     * @psalm-suppress UndefinedClass
-     */
+    /** @psalm-suppress UndefinedClass */
     yield from class_exists(ClassReflector::class) ? (new ClassReflector($sourceLocator))->getAllClasses() : (new DefaultReflector($sourceLocator))->reflectAllClasses();
 }
