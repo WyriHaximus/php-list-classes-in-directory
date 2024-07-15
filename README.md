@@ -1,11 +1,11 @@
 # List all PHP classes in directories and files
 
-[![Build Status](https://travis-ci.com/WyriHaximus/php-list-classes-in-directory.svg?branch=master)](https://travis-ci.com/WyriHaximus/php-list-classes-in-directory)
+[![Continuous Integration](https://github.com/WyriHaximus/php-list-classes-in-directory/actions/workflows/ci.yml/badge.svg)](https://github.com/WyriHaximus/php-list-classes-in-directory/actions/workflows/ci.yml)
 [![Latest Stable Version](https://poser.pugx.org/wyrihaximus/list-classes-in-directory/v/stable.png)](https://packagist.org/packages/wyrihaximus/list-classes-in-directory)
 [![Total Downloads](https://poser.pugx.org/wyrihaximus/list-classes-in-directory/downloads.png)](https://packagist.org/packages/wyrihaximus/list-classes-in-directory/stats)
 [![Code Coverage](https://scrutinizer-ci.com/g/wyrihaximus/php-list-classes-in-directory/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/wyrihaximus/php-list-classes-in-directory/?branch=master)
 [![License](https://poser.pugx.org/wyrihaximus/list-classes-in-directory/license.png)](https://packagist.org/packages/wyrihaximus/list-classes-in-directory)
-[![PHP 7 ready](http://php7ready.timesplinter.ch/wyrihaximus/php-list-classes-in-directory/badge.svg)](https://travis-ci.org/WyriHaximus/php-list-classes-in-directory)
+
 
 # Install
 
@@ -18,61 +18,59 @@ composer require wyrihaximus/list-classes-in-directory
 # Usage
 
 #### get a list of classes from multiple directories.
+
 ```php
-use function WyriHaximus\listClassesInDirectories;
-use function WyriHaximus\listInstantiatableClassesInDirectories;
-use function WyriHaximus\listNonInstantiatableClassesInDirectories;
+use function WyriHaximus\Lister;
 
 // $classes now contains a list of full qualified class names from 'src/' and 'tests/'
-$classes = listClassesInDirectories(
+$classes = Lister::classesInDirectories(
     __DIR__ . '/src',
     __DIR__ . '/tests'
 );
 
 
 // use listInstantiatableClassesInDirectories() or listNonInstantiatableClassesInDirectories() to only consider classes that can actually be instantiated, or not.
-$instantiatableClasses = listInstantiatableClassesInDirectory(
-    __DIR__ . '/src', 
+$instantiatableClasses = Lister::instantiatableClassesInDirectory(
+    __DIR__ . '/src',
     __DIR__ . '/tests'
 );
-$nonInstantiatableClasses = listNonInstantiatableClassesInDirectory(
-    __DIR__ . '/src', 
+$nonInstantiatableClasses = Lister::nonInstantiatableClassesInDirectory(
+    __DIR__ . '/src',
     __DIR__ . '/tests'
 );
 ```
 
 #### get a list of classes from one directory.
 ```php
-use function WyriHaximus\listClassesInDirectory;
-use function WyriHaximus\listInstantiatableClassesInDirectory;
-use function WyriHaximus\listNonInstantiatableClassesInDirectory;
+use function WyriHaximus\Lister;
 
 // $classes now contains a list of full qualified class names from __DIR__
-$classes = listClassesInDirectory(__DIR__);
+$classes = Lister::classesInDirectory(__DIR__);
 
 // use listInstantiatableClassesInDirectory() or listNonInstantiatableClassesInDirectory() to only consider classes that can actually be instantiated, or not.
-$instantiatableClasses = listInstantiatableClassesInDirectory(__DIR__);
-$nonInstantiatableClasses = listNonInstantiatableClassesInDirectory(__DIR__);
+$instantiatableClasses = Lister::instantiatableClassesInDirectory(__DIR__);
+$nonInstantiatableClasses = Lister::nonInstantiatableClassesInDirectory(__DIR__);
 
 ```
+
 #### get a list of classes from multiple files.
 ```php
-use function WyriHaximus\listClassesInFiles;
+use function WyriHaximus\Lister;
 
 // $classes now contains a list of full qualified class names from 'Bar.php' and 'Foo.php'
-$classes = listClassesInFiles(
+$classes = Lister::classesInFiles(
     __DIR__ . '/Bar.php',
     __DIR__ . '/Foo.php'
 );
 ```
+
 #### get a list of classes from one file.
 ```php
-use function WyriHaximus\listClassesInFile;
+use function WyriHaximus\Lister;
 
 // $classes now contains a list of full qualified class names from 'Foo.php'
-$classes = listClassesInFile(__DIR__.'/Foo.php');
+$classes = Lister::classesInFile(__DIR__.'/Foo.php');
 ```
-
 
 # Acknowledgement
 
@@ -82,7 +80,7 @@ This package is a shorthand function for using [`better reflection`](https://git
 
 The MIT License (MIT)
 
-Copyright (c) 2018 Cees-Jan Kiewiet
+Copyright (c) 2024 Cees-Jan Kiewiet
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
