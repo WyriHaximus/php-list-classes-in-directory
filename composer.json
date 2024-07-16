@@ -10,13 +10,15 @@
   ],
   "require": {
     "php": "^8.2",
-    "roave/better-reflection": "^6",
-    "wyrihaximus/constants": "^1.6"
+    "roave/better-reflection": "^6.5"
   },
   "require-dev": {
     "wyrihaximus/test-utilities": "^6.0.9"
   },
   "autoload": {
+    "psr-4": {
+      "WyriHaximus\\": "src"
+    },
     "files": [
       "src/functions_include.php"
     ]
