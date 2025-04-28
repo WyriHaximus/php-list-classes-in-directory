@@ -13,7 +13,7 @@
     "roave/better-reflection": "^6.5"
   },
   "require-dev": {
-    "wyrihaximus/test-utilities": "^6.0.9"
+    "wyrihaximus/test-utilities": "^6.0.9 || ^7.0.0"
   },
   "autoload": {
     "psr-4": {
