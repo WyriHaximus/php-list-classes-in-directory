@@ -9,11 +9,12 @@
     }
   ],
   "require": {
-    "php": "^8.2",
+    "php": "^8.4",
     "roave/better-reflection": "^6.5"
   },
   "require-dev": {
-    "wyrihaximus/test-utilities": "^6.0.9"
+    "wyrihaximus/makefiles": "^0.7.6",
+    "wyrihaximus/test-utilities": "^12.2.0"
   },
   "autoload": {
     "psr-4": {
@@ -39,19 +40,22 @@
       "dealerdirect/phpcodesniffer-composer-installer": true,
       "ergebnis/composer-normalize": true,
       "icanhazstring/composer-unused": true,
-      "infection/extension-installer": true
+      "infection/extension-installer": true,
+      "phpstan/extension-installer": true,
+      "wyrihaximus/makefiles": true,
+      "wyrihaximus/test-utilities": true
     },
     "platform": {
-      "php": "8.2.13"
+      "php": "8.4.13"
     },
     "sort-packages": true
   },
   "scripts": {
     "post-install-cmd": [
-      "composer normalize"
+      "make on-install-or-update || true"
     ],
     "post-update-cmd": [
-      "composer normalize"
+      "make on-install-or-update || true"
     ]
   }
 }

@@ -3,6 +3,3 @@ parameters:
 		noExtends:
 			classesAllowedToBeExtended:
 			    - FilterIterator
-
-includes:
-	- ../../vendor/wyrihaximus/test-utilities/rules.neon

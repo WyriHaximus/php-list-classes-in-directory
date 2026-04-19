@@ -18,6 +18,7 @@ use Roave\BetterReflection\SourceLocator\Type\SingleFileSourceLocator;
 use function array_values;
 use function is_string;
 
+/** @api */
 final readonly class Lister
 {
     /**
@@ -102,7 +103,7 @@ final readonly class Lister
          * @psalm-suppress InvalidOperand
          */
         return new class (new ArrayIterator([...$iterator])) extends FilterIterator {
-            private const DOES_NOT_ACCEPT_CLASS = false;
+            private const false DOES_NOT_ACCEPT_CLASS = false;
 
             public function accept(): bool
             {
@@ -138,7 +139,7 @@ final readonly class Lister
          * @psalm-suppress InvalidOperand
          */
         return new class (new ArrayIterator([...$iterator])) extends FilterIterator {
-            private const DOES_NOT_ACCEPT_CLASS = false;
+            private const false DOES_NOT_ACCEPT_CLASS = false;
 
             public function accept(): bool
             {
