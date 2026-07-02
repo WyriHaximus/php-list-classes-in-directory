@@ -1,8 +1,35 @@
+# Set the default behavior, in case people don't have core.autocrlf set.
+* text eol=lf
+
+# These files are binary and should be left untouched
+# (binary is a macro for -text -diff)
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.webp binary
+*.bmp binary
+*.ttf binary
+*.blp binary
+*.db2 binary
+
 # Ignoring files for distribution archieves
+.github/ export-ignore
+etc/ci/ export-ignore
+etc/dev-app/ export-ignore
+etc/qa/ export-ignore
 examples/ export-ignore
 tests/ export-ignore
-.travis.yml export-ignore
-.gitignore export-ignore
+var/ export-ignore
+.devcontainer.json export-ignore
+.editorconfig export-ignore
 .gitattributes export-ignore
-.scrutinizer.yml export-ignore
-phpunit.xml.dist export-ignore
+.gitignore export-ignore
+CONTRIBUTING.md export-ignore
+composer.lock export-ignore
+Makefile export-ignore
+README.md export-ignore
+
+# Diffing
+*.php diff=php

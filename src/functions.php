@@ -77,11 +77,7 @@ function listNonInstantiatableClassesInDirectory(string $directory): iterable
     return Lister::nonInstantiatableClassesInDirectory($directory);
 }
 
-/**
- * @internal
- *
- * @return iterable<ReflectionClass>
- */
+/** @return iterable<ReflectionClass> */
 function listClassesInSourceLocator(AggregateSourceLocator $sourceLocator): iterable
 {
     return Lister::classesInSourceLocator($sourceLocator);
