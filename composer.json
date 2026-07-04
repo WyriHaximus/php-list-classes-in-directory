@@ -13,7 +13,7 @@
     "roave/better-reflection": "^6.5"
   },
   "require-dev": {
-    "wyrihaximus/makefiles": "^0.7.6",
+    "wyrihaximus/makefiles": "^0.12.3",
     "wyrihaximus/test-utilities": "^12.2.0"
   },
   "autoload": {

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace WyriHaximus\Tests;
 
+use PHPUnit\Framework\Attributes\Test;
 use Test\App\Commands\AwesomesauceCommand;
 use Test\App\Foo\Bar\Bar;
 use Test\App\Foo\Bar\Foo;
@@ -24,10 +25,10 @@ use function WyriHaximus\listNonInstantiatableClassesInDirectory;
 use const DIRECTORY_SEPARATOR;
 use const SORT_NATURAL;
 
-/** @internal */
 final class FunctionalTest extends TestCase
 {
-    public function testListClassesInDirectory(): void
+    #[Test]
+    public function listClassesInDirectory(): void
     {
         $classes = [...listClassesInDirectory(dirname(__DIR__) . DIRECTORY_SEPARATOR . 'test-app' . DIRECTORY_SEPARATOR)];
         sort($classes, SORT_NATURAL);
@@ -40,7 +41,8 @@ final class FunctionalTest extends TestCase
         ], $classes);
     }
 
-    public function testListClassesInDirectories(): void
+    #[Test]
+    public function listClassesInDirectories(): void
     {
         $app = dirname(__DIR__) . DIRECTORY_SEPARATOR . 'test-app' . DIRECTORY_SEPARATOR;
 
@@ -53,7 +55,8 @@ final class FunctionalTest extends TestCase
         ], $classes);
     }
 
-    public function testListClassesInFile(): void
+    #[Test]
+    public function listClassesInFile(): void
     {
         $path = dirname(__DIR__) . DIRECTORY_SEPARATOR . 'test-app' . DIRECTORY_SEPARATOR . 'Foo' . DIRECTORY_SEPARATOR . 'Bar';
 
@@ -66,7 +69,8 @@ final class FunctionalTest extends TestCase
         ], $classes);
     }
 
-    public function testListClassesInFiles(): void
+    #[Test]
+    public function listClassesInFiles(): void
     {
         $app     = dirname(__DIR__) . DIRECTORY_SEPARATOR . 'test-app' . DIRECTORY_SEPARATOR;
         $foobar  = $app . 'Foo' . DIRECTORY_SEPARATOR . 'Bar' . DIRECTORY_SEPARATOR . 'BarAndFoo.php';
@@ -82,7 +86,8 @@ final class FunctionalTest extends TestCase
         ], $classes);
     }
 
-    public function testListInstantiatableClassesInDirectory(): void
+    #[Test]
+    public function listInstantiatableClassesInDirectory(): void
     {
         $directory = dirname(__DIR__) . DIRECTORY_SEPARATOR . 'test-classes' . DIRECTORY_SEPARATOR;
         $classes   = [...listInstantiatableClassesInDirectory($directory)];
@@ -93,7 +98,8 @@ final class FunctionalTest extends TestCase
         ], $classes);
     }
 
-    public function testListNonInstantiatableClassesInDirectory(): void
+    #[Test]
+    public function listNonInstantiatableClassesInDirectory(): void
     {
         $directory = dirname(__DIR__) . DIRECTORY_SEPARATOR . 'test-classes' . DIRECTORY_SEPARATOR;
         $classes   = [...listNonInstantiatableClassesInDirectory($directory)];

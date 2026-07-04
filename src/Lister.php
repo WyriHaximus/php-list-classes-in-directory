@@ -33,10 +33,10 @@ final readonly class Lister
         $sourceLocator = new AggregateSourceLocator([
             new DirectoriesSourceLocator(
                 array_values($directories),
-                (new BetterReflection())->astLocator(),
+                new BetterReflection()->astLocator(),
             ),
             // ↓ required to autoload parent classes/interface from another directory than /src (e.g. /vendor)
-            new AutoloadSourceLocator((new BetterReflection())->astLocator()),
+            new AutoloadSourceLocator(new BetterReflection()->astLocator()),
         ]);
 
         foreach (self::classesInSourceLocator($sourceLocator) as $class) {
@@ -66,10 +66,10 @@ final readonly class Lister
         $sourceLocator = new AggregateSourceLocator([
             new SingleFileSourceLocator(
                 $file,
-                (new BetterReflection())->astLocator(),
+                new BetterReflection()->astLocator(),
             ),
             // ↓ required to autoload parent classes/interface from another directory (e.g. /vendor)
-            new AutoloadSourceLocator((new BetterReflection())->astLocator()),
+            new AutoloadSourceLocator(new BetterReflection()->astLocator()),
         ]);
 
         foreach (self::classesInSourceLocator($sourceLocator) as $class) {
@@ -98,10 +98,6 @@ final readonly class Lister
     {
         $iterator = self::classesInDirectories(...$directories);
 
-        /**
-         * @psalm-suppress MissingTemplateParam
-         * @psalm-suppress InvalidOperand
-         */
         return new class (new ArrayIterator([...$iterator])) extends FilterIterator {
             private const false DOES_NOT_ACCEPT_CLASS = false;
 
@@ -134,10 +130,6 @@ final readonly class Lister
     {
         $iterator = self::classesInDirectories(...$directories);
 
-        /**
-         * @psalm-suppress MissingTemplateParam
-         * @psalm-suppress InvalidOperand
-         */
         return new class (new ArrayIterator([...$iterator])) extends FilterIterator {
             private const false DOES_NOT_ACCEPT_CLASS = false;
 
@@ -165,14 +157,9 @@ final readonly class Lister
         yield from self::nonInstantiatableClassesInDirectories($directory);
     }
 
-    /**
-     * @internal
-     *
-     * @return iterable<ReflectionClass>
-     */
+    /** @return iterable<ReflectionClass> */
     public static function classesInSourceLocator(AggregateSourceLocator $sourceLocator): iterable
     {
-        /** @psalm-suppress UndefinedClass */
-        yield from (new DefaultReflector($sourceLocator))->reflectAllClasses();
+        yield from new DefaultReflector($sourceLocator)->reflectAllClasses();
     }
 }
