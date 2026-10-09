@@ -17,5 +17,6 @@
     "ignoreMsiWithNoMutations": true,
     "mutators": {
         "@default": true
-    }
+    },
+    "threads": 64
 }
