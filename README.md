@@ -1,6 +1,6 @@
 # List all PHP classes in directories and files
 
-[![Continuous Integration](https://github.com/WyriHaximus/php-list-classes-in-directory/actions/workflows/ci.yml/badge.svg)](https://github.com/WyriHaximus/php-list-classes-in-directory/actions/workflows/ci.yml)
+[![Continuous Integration](https://github.com/WyriHaximus/php-list-classes-in-directory/actions/workflows/ci.yaml/badge.svg)](https://github.com/WyriHaximus/php-list-classes-in-directory/actions/workflows/ci.yaml)
 [![Latest Stable Version](https://poser.pugx.org/wyrihaximus/list-classes-in-directory/v/stable.png)](https://packagist.org/packages/wyrihaximus/list-classes-in-directory)
 [![Total Downloads](https://poser.pugx.org/wyrihaximus/list-classes-in-directory/downloads.png)](https://packagist.org/packages/wyrihaximus/list-classes-in-directory/stats)
 [![Code Coverage](https://scrutinizer-ci.com/g/wyrihaximus/php-list-classes-in-directory/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/wyrihaximus/php-list-classes-in-directory/?branch=master)
